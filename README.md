@@ -81,6 +81,8 @@ $$ALG \le 2 \cdot OPT$$
 
 Therefore, it is proved that the greedy approach outputs a solution with makespan at most 2 times the optimum.
 
+Time & Space Complexity:
+
 (ii)Sorted Greedy Job Scheduling:
 The basic Greedy algorithm can fail when a huge job appears at the very end of the list, creating a sudden spike in height. By processing the biggest jobs first:
 The large "rocks" form a solid foundation at the bottom. The smaller "sand" (smaller jobs) fills in the gaps at the top, evening out the stacks. This prevents the "unlucky" worst-case scenario where a giant block lands on top of an already high stack.
@@ -162,3 +164,110 @@ $$ALG \le OPT + 0.5 \cdot OPT$$
 $$ALG \le 1.5 \cdot OPT$$
 
 Therefore, it is proved that the sorted greedy approach outputs a solution with makespan at most 1.5 times the optimum.
+
+Time & Space Complexity:
+
+
+(iii)Polynomial Time Approximation Scheme (PTAS):
+Unlike the Greedy algorithms which give a fixed guarantee (like 2x or 1.5x), a PTAS allows us to choose how close we want to be to the perfect solution. We can pick an error parameter $\epsilon$ (epsilon). The algorithm guarantees a solution within $(1+\epsilon)$ of the optimal.
+
+The algorithm guarantees a solution within $(1+\epsilon)$ of the optimal. For a rough answer fast, choose a large $\epsilon$ whereas for a very precise answer, choose a tiny $\epsilon$. Moreover, the algorithm combines three techniques: Binary Search, Rounding, and Dynamic Programming.
+
+
+Part A: The Geometric Rounding Logic
+
+Goal: Prove that rounding doesn't change the answer by more than a factor of $(1+\epsilon)$.
+
+The Math:
+We define a set of interval buckets based on powers of $(1+\epsilon)$:
+$[1, 1+\epsilon), [(1+\epsilon), (1+\epsilon)^2), \dots$
+
+If a job has a real size $P_{real}$ that falls into the interval $[X, X(1+\epsilon))$, we simplify it by rounding it down to $X$.
+
+Rounded Size: $P_{rounded} = X$
+
+Real Size: $P_{real} < X(1+\epsilon)$
+
+Therefore, the relationship between the real and rounded size is:
+
+
+$$P_{real} < P_{rounded} \cdot (1+\epsilon)$$
+
+Conclusion: If we find a valid schedule using the rounded sizes that fits within time $T$, converting those blocks back to their real sizes will expand the total time by at most that same factor:
+
+
+$$\text{Real Time} \le T \cdot (1+\epsilon)$$
+
+Part B: The Small Jobs Logic
+
+Goal: Prove that adding the "small" jobs (which we ignored earlier) doesn't break the schedule too badly.
+
+The Math:
+A "small" job is defined as any job with size $p < \epsilon \cdot T$.
+When we greedily add these small jobs to the schedule, two things can happen:
+
+It fits: The job fits into an existing gap below time $T$. (No increase in makespan).
+
+It overflows: The job forces a machine to go above time $T$.
+
+If it overflows, the machine was previously at some height $H \le T$, and we added a small job $p$. The new height is $H + p$.
+Since $p < \epsilon \cdot T$, the new height is:
+
+
+$$\text{New Height} < T + \epsilon \cdot T = T(1+\epsilon)$$
+
+Conclusion: Handling small jobs increases the makespan by at most a factor of $(1+\epsilon)$.
+
+Part C: The Final Algebra
+
+Now we combine Part A (Rounding) and Part B (Small Jobs).
+We found a schedule for rounded jobs in time $T$. When we restore the real sizes and add small jobs, the errors multiply.
+
+$$ALG \le T \cdot (1+\epsilon) \cdot (1+\epsilon)$$
+
+$$ALG \le T \cdot (1+\epsilon)^2$$
+
+Expanding the Square:
+Using standard algebra: $(1+\epsilon)^2 = 1 + 2\epsilon + \epsilon^2$.
+
+Since $\epsilon$ is a small number (between 0 and 1), its square $\epsilon^2$ is even smaller (e.g., if $\epsilon = 0.1$, then $\epsilon^2 = 0.01$). In approximation theory, we often simplify $\epsilon^2 \le \epsilon$ to get a clean upper bound:
+
+
+$$1 + 2\epsilon + \epsilon^2 \le 1 + 2\epsilon + \epsilon = 1 + 3\epsilon$$
+
+Final Result:
+
+
+$$ALG \le (1+3\epsilon) \cdot T^*$$
+
+
+For any error parameter $0 < \epsilon \le 1$, the algorithm produces a schedule with makespan at most:
+
+
+$$ALG \le (1+\epsilon)^2 \cdot T^* \approx (1+3\epsilon) \cdot T^*$$
+
+Time & Space Complexity:
+
+$$O(n^{2k} \cdot \lceil \log_2 (1/\epsilon) \rceil)$$; Where $k$ (number of distinct sizes) depends on $1/\epsilon$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
