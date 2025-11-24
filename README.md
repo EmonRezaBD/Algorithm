@@ -79,3 +79,86 @@ $$ALG \le OPT + OPT$$
 
 $$ALG \le 2 \cdot OPT$$
 
+Therefore, it is proved that the greedy approach outputs a solution with makespan at most 2 times the optimum.
+
+(ii)Sorted Greedy Job Scheduling:
+The basic Greedy algorithm can fail when a huge job appears at the very end of the list, creating a sudden spike in height. By processing the biggest jobs first:
+The large "rocks" form a solid foundation at the bottom. The smaller "sand" (smaller jobs) fills in the gaps at the top, evening out the stacks. This prevents the "unlucky" worst-case scenario where a giant block lands on top of an already high stack.
+
+Procedure:
+
+-Sort all jobs (blocks) from largest to smallest.
+
+-Initialize $m$ machines with 0 load.
+
+-Process the sorted jobs one by one.
+
+-Assign the current job to the machine with the minimum current load.
+
+3. Theorem 2
+
+Statement: The Sorted Greedy Job Scheduling algorithm is a 1.5-approximation means it is at most 1.5 times the optimal makespan.
+
+$$ALG \le 1.5 \cdot OPT$$
+
+4. Proof
+
+Lemma 1: The Basics (Same as Algorithm 1)
+
+Let the machine that finishes last define our makespan ($ALG$).
+Let $j_{last}$ be the last job added to this machine, with size $p_{last}$.
+Let $L$ be the load of this machine before $j_{last}$ was added.
+
+We know from the previous proof that:
+
+$ALG = L + p_{last}$
+
+$OPT \ge L$ (Because this was the shortest stack, so all others are taller).
+
+Step 2: The Sorting Advantage
+
+Because we sorted the jobs from largest to smallest, every job processed before $j_{last}$ must be at least as big as $j_{last}$.
+
+Since $L$ is the height of the stack under $j_{last}$, there must be at least one job in that stack (unless $L=0$, in which case the solution is optimal).
+Therefore, every machine has at least one job on it that is $\ge p_{last}$.
+
+Step 3: The Pigeonhole Principle
+
+Count the "big" jobs involved so far:
+
+We have $m$ machines.
+
+Each machine has at least 1 job $\ge p_{last}$ already on it.
+
+We just added $j_{last}$ (which is also a job of size $p_{last}$).
+
+Total "big" jobs = $m + 1$.
+
+If you have $m$ machines (buckets) and $m+1$ big jobs (items), the Pigeonhole Principle says that at least one machine must hold 2 big jobs in the optimal solution.
+
+Step 4: Bounding the Optimal
+
+Since the optimal solution ($OPT$) must fit these $m+1$ jobs onto $m$ machines, one machine must handle two jobs of size $p_{last}$ (or larger).
+Therefore:
+
+
+$$OPT \ge 2 \cdot p_{last}$$
+
+
+Or, dividing by 2:
+
+
+$$p_{last} \le \frac{1}{2} \cdot OPT$$
+
+
+Finally, Now we substitute this into our original equation ($ALG = L + p_{last}$):
+
+We know $L \le OPT$.
+
+We just proved $p_{last} \le 0.5 \cdot OPT$.
+
+$$ALG \le OPT + 0.5 \cdot OPT$$
+
+$$ALG \le 1.5 \cdot OPT$$
+
+Therefore, it is proved that the sorted greedy approach outputs a solution with makespan at most 1.5 times the optimum.
