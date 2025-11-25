@@ -1,7 +1,7 @@
 <center>Approximation Algorithms for Makespan Scheduling</center> <br> 
-<center>Md Rokonuzzaman Reza, Souhardya Saha Dip</center>\
+<center>Md Rokonuzzaman Reza, Souhardya Saha Dip</center>
 
-##**Problem Overview**
+**##Problem Overview**
 The objective is to assign a set of $n$ jobs, each with a specific processing time, to a set of $m$ machines such that the maximum load on any single machine is minimized.
 Formally, given a set of machines $M = \{1, \dots, m\}$ and a set of jobs $J = \{1, \dots, n\}$ where job $j$ requires processing time $p_{ij}$ on machine $i$, we seek an assignment that minimizes the makespan $C_{max}$:
 
