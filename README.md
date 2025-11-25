@@ -115,7 +115,7 @@ Therefore, it is proved that the sorted greedy approach outputs a solution with 
 **Time & Space Complexity:**
 
 
-## ** (iii)Polynomial Time Approximation Scheme (PTAS):**
+## **(iii)Polynomial Time Approximation Scheme (PTAS):**
 Unlike the Greedy algorithms which give a fixed guarantee (like 2x or 1.5x), a PTAS allows us to choose how close we want to be to the perfect solution. We can pick an error parameter $\epsilon$ (epsilon). The algorithm guarantees a solution within $(1+\epsilon)$ of the optimal. The algorithm guarantees a solution within $(1+\epsilon)$ of the optimal. For a rough answer fast, choose a large $\epsilon$ whereas for a very precise answer, choose a tiny $\epsilon$. Moreover, the algorithm combines three techniques: Binary Search, Rounding, and Dynamic Programming.
 
 
