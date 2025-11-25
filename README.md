@@ -9,35 +9,28 @@
 
 ## **Problem Overview**
 
-The objective is to assign a set of $n$ jobs, each with a specific processing time, to a set of $m$ machines such that the maximum load on any single machine is minimized.
-
-Formally, given a set of machines $M = \{1, \dots, m\}$ and a set of jobs $J = \{1, \dots, n\}$ where job $j$ requires processing time $p_{ij}$ on machine $i$, we seek an assignment that minimizes the makespan $C_{max}$:
+This minipaper briefly illustrates the theoretical foundation, proof, and examples for solving Makespan scheduling. The objective is to assign a set of $n$ jobs, each with a specific processing time, to a set of $m$ machines such that the maximum load on any single machine is minimized. Formally, given a set of machines $M = \{1, \dots, m\}$ and a set of jobs $J = \{1, \dots, n\}$ where job $j$ requires processing time $p_{ij}$ on machine $i$, we seek an assignment that minimizes the makespan $C_{max}$:
 
 $$C_{max} = \max_{i \in M} \sum_{j \in J_i} p_{ij}$$; where $J_i$ is the subset of jobs assigned to machine $i$.
 
-We can make an intuitive analogy for this problem with "Block Stacking," where jobs are viewed as blocks of varying heights, and machines are stacks. The goal is to distribute the blocks among $m$ stacks so that the height of the tallest stack is as low as possible.
+We can make an intuitive analogy for this problem with "Block Stacking," where jobs are viewed as blocks of varying heights, and machines are stacks. The goal is to distribute the blocks among $m$ stacks so that the height of the tallest stack is as low as possible. Makespan Scheduling is classified as NP-Hard, which means it is computationally intractable to find the perfect, optimal solution efficiently for every possible input. This hardness is theoretically proven by observing that scheduling jobs on just two identical machines is mathematically equivalent to the Partition Problem, a famous NP-Complete puzzle that asks if a set of numbers can be split into two exactly equal sums. Consequently, this minipaper focuses on Approximation Algorithms that guarantee a solution within a specific factor (e.g., within 2 times or 1.5 times) of the optimal makespan. Thus, we will prove total of 03 algorithms (i)Greedy Job Scheduling (ii)Sorted Greedy Job Scheduling, and (iii)Polynomial Time Approximation Scheme (PTAS) 
 
-This problem is NP-hard, meaning that no polynomial-time algorithm is known to find the exact optimal solution for all inputs. Consequently, this minipaper focuses on Approximation Algorithms that guarantee a solution within a specific factor (e.g., within 2 times or 1.5 times) of the optimal makespan. We will prove total of 03 algorithms (i)Greedy Job Scheduling (ii)Sorted Greedy Job Scheduling, and (iii)Polynomial Time Approximation Scheme (PTAS) 
+## **(i)Greedy Job Scheduling:**
 
-(i)Greedy Job Scheduling:
 This algorithm called Greedy because it makes the best immediate choice at every single step. When the algorithm picks a machine for a job, it looks for the "cheapest" option available right now (the machine with the lowest load). It does not look ahead.
 
-Procedure:
+**Procedure:**
+* Initialize $m$ machines with 0 load.
+* Process jobs one by one in arbitrary order.
+* Assign the current job to the machine with the minimum current load.
 
--Initialize $m$ machines with 0 load.
-
--Process jobs one by one in arbitrary order.
-
--Assign the current job to the machine with the minimum current load.
-
-2. Theorem 1
+**Theorem 1**
 
 Statement: The Greedy Job Scheduling algorithm is a 2-approximation means it is at most twice the optimal makespan.
 
 $$ALG \le 2 \cdot OPT$$
 
-3. Proof
-
+**Proof**
 Lemma 1: Lower Bounds on Optimal
 
 The optimal makespan ($OPT$) is limited by two physical constraints:
