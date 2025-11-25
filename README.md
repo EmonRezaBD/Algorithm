@@ -1,7 +1,6 @@
-<div style="text-align:center;">  
-Approximation Algorithms for Makespan Scheduling  
+<center>Approximation Algorithms for Makespan Scheduling <br> 
 Md Rokonuzzaman Reza, Souhardya Saha Dip 
-</div> 
+</center>
   
 
 1. Problem Overview
