@@ -1,7 +1,8 @@
-# Algorithm
-
+<div style="text-align:center;">  
 Approximation Algorithms for Makespan Scheduling  
 Md Rokonuzzaman Reza, Souhardya Saha Dip 
+</div> 
+  
 
 1. Problem Overview
 The objective is to assign a set of $n$ jobs, each with a specific processing time, to a set of $m$ machines such that the maximum load on any single machine is minimized.
